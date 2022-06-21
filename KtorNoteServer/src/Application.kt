@@ -40,7 +40,7 @@ fun Application.module(testing: Boolean = false) {
         issuer = environment.config.property("jwt.issuer").getString(),
         audience = environment.config.property("jwt.audience").getString(),
         expiresIn = 365L * 1000L * 60L * 60L * 24L,
-        secret = environment.config.property("jwt.audience").getString()
+        secret = environment.config.property("jwt.secret").getString()
     )
 
     routing {

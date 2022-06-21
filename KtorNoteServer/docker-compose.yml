@@ -1,0 +1,6 @@
+services:
+  notes:
+    container_name: db-note
+    build: .
+    ports:
+      - "8081:8081"

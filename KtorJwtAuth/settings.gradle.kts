@@ -1,0 +1,1 @@
+rootProject.name = "com.ionutv.ktor-jwt-auth"

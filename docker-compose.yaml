@@ -1,0 +1,14 @@
+services:
+    auth:
+        build: KtorJwtAuth
+        env_file:
+            - .env
+        ports:
+            - "8080:8080"
+    
+    notes:
+        build: KtorNoteServer
+        env_file:
+            - .env
+        ports:
+            - "8081:8081"

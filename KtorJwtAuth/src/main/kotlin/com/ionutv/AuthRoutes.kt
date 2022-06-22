@@ -35,7 +35,11 @@ fun Route.signUp(
             call.respond(HttpStatusCode.Conflict, "Invalid data")
             return@post
         }
-
+        if (userDataSource.getUserByUsername(request.username) != null) {
+            call.respond(HttpStatusCode.Conflict, "Account with email already exists")
+            return@post
+        }
+        
         val saltedHash = hashingService.generateSaltedHash(request.password)
         val user = User(
             username = request.username,
@@ -80,10 +84,6 @@ fun Route.signIn(
         if (!isValidPassword) {
             println("Entered hash: ${DigestUtils.sha256Hex("${user.salt}${request.password}")}, Hashed PW: ${user.password}")
             call.respond(HttpStatusCode.Conflict, "Incorrect username or password")
-            return@post
-        }
-        if (userDataSource.getUserByUsername(request.username) != null) {
-            call.respond(HttpStatusCode.Conflict, "Account with email already exists")
             return@post
         }
 

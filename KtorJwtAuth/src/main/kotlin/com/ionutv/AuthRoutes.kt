@@ -82,6 +82,10 @@ fun Route.signIn(
             call.respond(HttpStatusCode.Conflict, "Incorrect username or password")
             return@post
         }
+        if (userDataSource.getUserByUsername(request.username) != null) {
+            call.respond(HttpStatusCode.Conflict, "Account with email already exists")
+            return@post
+        }
 
         val token = tokenService.generate(
             config = tokenConfig,
